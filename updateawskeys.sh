@@ -62,25 +62,24 @@ new_access_key=$(echo "$new_access_key" | jq .AccessKey.AccessKeyId | sed 's/"//
 # Save the old aws credentials file
 cp -f ~/.aws/credentials ~/.aws/credentials.1
 
-# Use sed to delete default and specific sections (including the access/secret keys)
-# then use sed to insert the updated versions at the start of the credentials file
+## Use python to replace default and specific sections (including the access/secret keys)
 if [ -z ${DO_SECTION+x} ]
 then
   echo "DO_SECTION not defined"
-  cp ~/.aws/credentials.1 ~/.aws/credentials.2
 else
-  cat ~/.aws/credentials.1 | sed "/\[${DO_SECTION}\]/,+2d"|sed "1s/^/\[${DO_SECTION}\]\naws_access_key_id = ${new_access_key}\naws_secret_access_key = ${new_secret_key}\n/" > ~/.aws/credentials.2
+  python3 /opt/python/configjsonconfig/configtojson.py -i ~/.aws/credentials > /tmp/old.credentials
+  python3 /opt/python/configjsonconfig/upsertjson.py -i /tmp/old.credentials -s ${DO_SECTION} -k aws_access_key_id -v ${new_access_key} > /tmp/int.credentials
+  python3 /opt/python/configjsonconfig/upsertjson.py -i /tmp/int.credentials -s ${DO_SECTION} -k aws_secret_access_key -v ${new_secret_key} > /tmp/new.credentials
+  python3 /opt/python/configjsonconfig/jsontoconfig.py -i /tmp/new.credentials > ~/.aws/credentials
 fi
 
 if [ "${DO_DEFAULT^^}" == "TRUE" ]
 then
-  cat ~/.aws/credentials.2 | sed '/\[default\]/,+2d'| sed "1s/^/\[default\]\naws_access_key_id = ${new_access_key}\naws_secret_access_key = ${new_secret_key}\n\n/" > ~/.aws/credentials.3
-else
-  echo "DO_DEFAULT not TRUE"
-  cp ~/.aws/credentials.2 ~/.aws/credentials.3
+  python3 /opt/python/configjsonconfig/configtojson.py -i ~/.aws/credentials > /tmp/old.credentials
+  python3 /opt/python/configjsonconfig/upsertjson.py -i /tmp/old.credentials -s default -k aws_access_key_id -v ${new_access_key} > /tmp/int.credentials
+  python3 /opt/python/configjsonconfig/upsertjson.py -i /tmp/int.credentials -s default -k aws_secret_access_key -v ${new_secret_key} > /tmp/new.credentials
+  python3 /opt/python/configjsonconfig/jsontoconfig.py -i /tmp/new.credentials > ~/.aws/credentials
 fi
-
-cp -f ~/.aws/credentials.3 ~/.aws/credentials
 
 # Sleep a little so aws has chance to finish creating keys before deleting the captured old key
 sleep 30
