@@ -48,10 +48,10 @@ then
 fi
 
 # Get 1 existing access key
-old_access_key=$(aws ${USE_PROFILE} iam list-access-keys --max-items 1|jq .AccessKeyMetadata[0].AccessKeyId|sed 's/"//g'|sed 's/\//\\\//g')
+old_access_key=$(aws iam list-access-keys "${USE_PROFILE}" --max-items 1|jq .AccessKeyMetadata[0].AccessKeyId|sed 's/"//g'|sed 's/\//\\\//g')
 
 # Create new access/secret key, capture json output
-new_access_key=$(aws ${USE_PROFILE} iam create-access-key)
+new_access_key=$(aws iam create-access-key "${USE_PROFILE}")
 
 # Get the new secret key from the json. Replace all / with \/ (so it does not mess up sed)
 new_secret_key=$(echo "$new_access_key" | jq .AccessKey.SecretAccessKey | sed 's/"//g' | sed 's/\//\\\//g')
@@ -85,4 +85,4 @@ fi
 sleep 30
 
 # Delete the old key captured at the start
-aws ${USE_PROFILE} iam delete-access-key --access-key-id "${old_access_key}"
+aws iam delete-access-key "${USE_PROFILE}" --access-key-id "${old_access_key}"
