@@ -5,6 +5,7 @@ COPY updateawskeys.sh /usr/local/bin/updateawskeys.sh
 RUN yum install -y python3 git \
  && pip3 install awscli \
  && yum install -y epel-release \
+ && echo "sslverify=0" >> /etc/yum.conf \
  && yum install -y jq \
  && chmod +x /usr/local/bin/updateawskeys.sh \
  && mkdir /opt/python \
@@ -14,5 +15,6 @@ RUN yum install -y python3 git \
 ENV DO_DEFAULT=""
 ENV DO_SECTION=""
 ENV UPDATE_DEFAULT="false"
+ENV INSECURE_AWS="false"
 
 ENTRYPOINT /usr/local/bin/updateawskeys.sh

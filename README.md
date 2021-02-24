@@ -17,6 +17,8 @@ The docker image takes 2 environment variables as input:
         UPDATE_DEFAULT  defaults to false. If set to true default key is changed to the new one,
                         even if DO_SECTION was used to run the aws cli.
 
+        INSECURE_AWS    defaults to false. If set to true, includes aws cli option --no-verify-ssl.
+
 build & run
 ===========
 
