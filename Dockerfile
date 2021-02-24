@@ -13,5 +13,6 @@ RUN yum install -y python3 git \
 
 ENV DO_DEFAULT=""
 ENV DO_SECTION=""
+ENV UPDATE_DEFAULT="false"
 
 ENTRYPOINT /usr/local/bin/updateawskeys.sh

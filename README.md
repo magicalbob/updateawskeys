@@ -14,6 +14,9 @@ The docker image takes 2 environment variables as input:
 			if DO_DEFAULT is false (in which case the existing DO_SECTION keys
 			will be used to run the aws cli).
 
+        UPDATE_DEFAULT  defaults to false. If set to true default key is changed to the new one,
+                        even if DO_SECTION was used to run the aws cli.
+
 build & run
 ===========
 
