@@ -3,7 +3,7 @@ FROM centos:7
 COPY updateawskeys.sh /usr/local/bin/updateawskeys.sh
 
 RUN yum install -y python3 git \
- && pip3 install awscli \
+ && pip3 install --trusted-host=files.pythonhosted.org --trusted-host=pypi.python.org awscli \
  && yum install -y epel-release \
  && echo "sslverify=0" >> /etc/yum.conf \
  && yum install -y jq \

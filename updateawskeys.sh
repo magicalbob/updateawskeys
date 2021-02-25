@@ -29,7 +29,7 @@ else
       echo "DO_SECTION set to ${DO_SECTION}"
       if [ "${DO_DEFAULT^^}" == "FALSE" ]
       then
-        USE_PROFILE=" --profile ${DO_SECTION} "
+        USE_PROFILE=" --profile ${DO_SECTION} --region eu-west-2 "
       fi
     fi
 fi
