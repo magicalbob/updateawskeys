@@ -11,9 +11,6 @@ then
   then
     USE_PROFILE=""
   fi
-else
-  echo "DO_DEFAULT must be TRUE or FALSE"
-  exit -1
 fi
 
 if [ -z "${DO_SECTION}" ]
@@ -27,10 +24,7 @@ else
       exit -2
     else
       echo "DO_SECTION set to ${DO_SECTION}"
-      if [ "${DO_DEFAULT^^}" == "FALSE" ]
-      then
-        USE_PROFILE=" --profile ${DO_SECTION} --region eu-west-2 "
-      fi
+      USE_PROFILE=" --profile ${DO_SECTION} --region eu-west-2 "
     fi
 fi
 
@@ -43,12 +37,12 @@ then
   fi
 fi
 
-if [ "${UPDATE_DEFAULT^^}" == "TRUE" ] || [ "${DO_DEFAULT^^}" == "TRUE" ]
+if [ "${DO_DEFAULT^^}" == "TRUE" ]
 then
     grep -i "^\[default\]" ~/.aws/credentials > /dev/null 2>&1
     if [ $? -ne 0 ]
     then
-      echo "UPDATE_DEFAULT / DO_DEFAULT is true but default does not exist"
+      echo "DO_DEFAULT is true but default does not exist"
       exit -4
     fi
 fi
