@@ -34,10 +34,8 @@ Example command to run the docker image:
 
 The script can be cron'ed to automatically change the keys e.g.
 
-	```
 	00 00 * * 1 /usr/bin/docker run -e DO_DEFAULT=true -e DO_SECTION=my-test-key -v ${HOME}/.aws:/root/.aws local:updateawskeys
 
 	01 00 * * 2 /usr/bin/docker run -e DO_DEFAULT=false -e DO_SECTION=my-prod-key -v ${HOME}/.aws:/root/.aws local:updateawskeys
-	```
 
 It is best to run the updates `out of hours` so that changes are not made wjilst the keys are in use.
