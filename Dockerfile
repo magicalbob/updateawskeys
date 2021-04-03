@@ -12,7 +12,7 @@ RUN yum install -y python3 git \
 COPY updateawskeys.sh /usr/local/bin/updateawskeys.sh
 RUN chmod +x /usr/local/bin/updateawskeys.sh
 
-ENV DO_DEFAULT=""
+ENV DO_DEFAULT="false"
 ENV DO_SECTION=""
 ENV UPDATE_DEFAULT="false"
 ENV INSECURE_AWS="false"

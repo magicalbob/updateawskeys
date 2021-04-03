@@ -11,6 +11,7 @@ The docker image takes 4 environment variables as input:
 
 	DO_DEFAULT	must be true or false. If true will update the default section and
 			the existing default keys will be used to run the aws cli.
+			Defaults to false.
 
 	DO_SECTION	an optional section name in ~/.aws/credentials. Must be specified
 			if DO_DEFAULT is false (in which case the existing DO_SECTION keys
