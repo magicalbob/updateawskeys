@@ -38,4 +38,4 @@ The script can be cron'ed to automatically change the keys e.g.
 
 	01 00 * * 2 /usr/bin/docker run -e DO_DEFAULT=false -e DO_SECTION=my-prod-key -v ${HOME}/.aws:/root/.aws local:updateawskeys
 
-It is best to run the updates `out of hours` so that changes are not made wjilst the keys are in use.
+It is best to run the updates `out of hours` so that changes are not made whilst the keys are in use.
