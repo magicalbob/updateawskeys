@@ -6,4 +6,4 @@ stages:
 build:
   stage: build
   script:
-    - docker build -t test:updateawskeys .
+    - echo hello
