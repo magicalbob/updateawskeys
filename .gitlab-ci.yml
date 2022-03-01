@@ -5,5 +5,7 @@ stages:
 
 build:
   stage: build
+  tags:
+    - linux
   script:
     - docker build -t test:updateawskeys .
