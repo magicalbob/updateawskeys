@@ -2,6 +2,7 @@
 
 stages:
   - build
+  - test
 
 build:
   stage: build
@@ -9,3 +10,12 @@ build:
     - linux
   script:
     - docker build -t test:updateawskeys .
+
+test:
+  stage: test
+  tags:
+    - linux
+  script:
+    - alias aws='echo aws'
+    - DO_DEFAULT=rubbish sh updateawskeys.sh
+    - DO_SECTION=rubbish sh updateawskeys.sh
