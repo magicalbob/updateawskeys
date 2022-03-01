@@ -11,6 +11,9 @@ then
   then
     USE_PROFILE=""
   fi
+else
+  echo "DO_DEFAULT must be set to TRUE or FALSE"
+  exit -1
 fi
 
 if [ -z "${DO_SECTION}" ]
