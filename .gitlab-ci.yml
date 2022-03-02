@@ -19,3 +19,4 @@ test:
     - alias aws='echo aws'
     - DO_DEFAULT=rubbish sh updateawskeys.sh||echo "Test 1 worked"
     - DO_DEFAULT=TRUE DO_SECTION=rubbish sh updateawskeys.sh||echo "Test 2 worked"
+    - DO_DEFAULT=FALSE sh updateawskeys.sh||echo "Test 3 worked"
