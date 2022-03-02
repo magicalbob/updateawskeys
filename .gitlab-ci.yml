@@ -17,5 +17,5 @@ test:
     - linux
   script:
     - alias aws='echo aws'
-    - DO_DEFAULT=rubbish sh updateawskeys.sh
-    - DO_SECTION=rubbish sh updateawskeys.sh
+    - DO_DEFAULT=rubbish sh updateawskeys.sh||echo "Test 1 worked"
+    - DO_DEFAULT=TRUE DO_SECTION=rubbish sh updateawskeys.sh||echo "Test 2 worked"
