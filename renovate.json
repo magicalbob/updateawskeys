@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", "schedule:nonOfficeHours"],
+  "extends": ["config:base"],
   "enabledManagers": ["dockerfile", "docker-compose"],
   "onboarding": "false"
 }
