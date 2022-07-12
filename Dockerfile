@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:8
 
 RUN yum install -y python3 git \
  && pip3 install --trusted-host=files.pythonhosted.org --trusted-host=pypi.python.org awscli \
