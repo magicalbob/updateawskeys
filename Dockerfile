@@ -1,12 +1,12 @@
-FROM centos:8
+FROM rockylinux:9.0.20220720
 
-RUN yum install -y python3 git \
- && pip3 install --trusted-host=files.pythonhosted.org --trusted-host=pypi.python.org awscli \
- && yum install -y epel-release \
- && echo "sslverify=0" >> /etc/yum.conf \
- && yum install -y jq \
- && mkdir /opt/python \
- && cd /opt/python \
+RUN yum install -y python3-pip git  \
+ && pip3 install --trusted-host=files.pythonhosted.org --trusted-host=pypi.python.org awscli  \
+ && yum install -y epel-release  \
+ && echo "sslverify=0" >> /etc/yum.conf  \
+ && yum install -y jq  \
+ && mkdir /opt/python  \
+ && cd /opt/python  \
  && git clone https://github.com/magicalbob/configjsonconfig.git
 
 COPY updateawskeys.sh /usr/local/bin/updateawskeys.sh
